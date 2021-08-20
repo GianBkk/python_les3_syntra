@@ -18,6 +18,10 @@ jobs:
 
       - name: Check Out Repo 
         uses: actions/checkout@v2
+        
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
 # To Cache Layers      
       - name: Cachelayer
@@ -46,7 +50,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pythonbuild:$tag
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/pythonbuild:${{ steps.get_version.outputs.VERSION }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
