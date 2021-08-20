@@ -1,4 +1,4 @@
-From python:alpine3.14
+FROM python:alpine3.14
 
 LABEL   maintainer="Gian Bakker" \
         name="python_les3_syntra"\
